@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import org.apache.commons.lang3.StringUtils;
 
 @WebServlet(name = "CommandServlet", urlPatterns = {"/CommandServlet"})
 public class CommandServlet extends HttpServlet {
@@ -53,7 +54,7 @@ public class CommandServlet extends HttpServlet {
             while ((line = reader.readLine())!= null) {
                 out.append(line + "\n");
             }
-
+            StringUtils.replaceEach(out, new String[]{"&", "\"", "<", ">"}, new String[]{"&amp;", "&quot;", "&lt;", "&gt;"});
             out.append("</pre>");
 
         } catch (Exception e) {
